@@ -1,0 +1,2 @@
+1. In chat system users can't see more than 7 lines of them chat attribute
+Also may be ai

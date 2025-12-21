@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/layout_bg"
+    tools:context="com.mediaghor.starnova.Fragments.AiFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:foreground="@drawable/black_transparent_black"
+            android:id="@+id/chat_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_190sdp"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/id_speaker_fa"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_45sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="bottom"
+                android:button="@null"
+                android:background="@drawable/cb_selector_sound"/>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:id="@+id/id_avtar_bg_animation_fa"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:padding="@dimen/_15sdp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_renderMode="hardware"
+                    app:lottie_cacheComposition="true"/>
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/id_avatar_animation_fa"
+                    android:layout_width="@dimen/_140sdp"
+                    android:layout_height="@dimen/_140sdp"
+                    android:layout_marginBottom="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_renderMode="hardware"
+                    app:lottie_cacheComposition="true"/>
+            </FrameLayout>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/id_microphone_fa"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_45sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="bottom"
+                android:button="@null"
+                android:background="@drawable/cb_selector_microphone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/_50sdp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/id_question"
+                android:textSize="20sp"
+                android:text=""
+                android:textColor="@color/color_white_low"
+                android:padding="10dp"
+                android:maxWidth="@dimen/_250sdp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/id_equalizer_fa"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="bottom|center"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_renderMode="hardware"
+                app:lottie_cacheComposition="true"/>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/input_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:background="@color/layout_bg"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/message_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_bg"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:maxLines="4"
+            android:textSize="16sp"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/send_message_button"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:src="@drawable/sent_message_rotate"/>
+
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="end"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:orientation="vertical">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/user_text"
+            android:background="@drawable/user_bubble"
+            android:text="Helooooooosdikjies eijdheid euidjheui deihdei deidjhei deidje idjeiwdj eijdeid eiwdjei deijdi iuih uhui uihiuouhjuijhoiuhoiuhoiuhiouhiouhifjh idhfdif difjdif difjd"
+            android:textColor="@color/color_white_low"
+            android:padding="10dp"
+            android:maxWidth="@dimen/_250sdp"/>
+</LinearLayout>

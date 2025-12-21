@@ -1,0 +1,67 @@
+
+
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { stream ->
+        localProperties.load(stream)
+    }
+}
+
+def groqApiKey = localProperties.getProperty("GROQ_API_KEY", "")
+def hfToken = localProperties.getProperty("HUGGINGFACE_TOKEN", "")
+
+android {
+    namespace 'com.mediaghor.starnova'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.mediaghor.starnova"
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "GROQ_API_KEY", "\"${groqApiKey}\""
+        buildConfigField "String", "HUGGINGFACE_TOKEN", "\"${hfToken}\""
+
+    }
+    buildFeatures {
+        dataBinding true
+        buildConfig true
+
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation 'com.google.mlkit:translate:17.0.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.airbnb.android:lottie:6.6.6'
+    implementation 'com.intuit.sdp:sdp-android:1.1.1'
+    implementation 'com.github.Foysalofficial:NafisBottomNav:5.0'
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}

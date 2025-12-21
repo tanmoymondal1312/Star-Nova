@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.ChatPro" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Status bar background color -->
+        <item name="android:statusBarColor">@color/transparent</item>
+
+        <!-- Status bar icon brightness -->
+        <!-- true = dark icons, false = light icons -->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Navigation bar background -->
+        <item name="android:navigationBarColor">@color/on_layout_bg</item>
+
+        <!-- Navigation bar icon brightness -->
+        <item name="android:windowLightNavigationBar">true</item>
+
+    </style>
+</resources>
