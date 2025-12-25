@@ -7,15 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mediaghor.starnova.AiRelated.GroqAIClint;
 import com.mediaghor.starnova.AiRelated.AiResponseCallback;
+import com.mediaghor.starnova.AiRelated.TranslateCallback;
+import com.mediaghor.starnova.AiRelated.TranslateClient;
+import com.mediaghor.starnova.Helper.WorkWithDevice;
 import com.mediaghor.starnova.Models.Message;
 import com.mediaghor.starnova.R;
+import com.rejowan.cutetoast.CuteToast;
 
 import java.util.List;
 
@@ -61,13 +67,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         } else {
             AIVH aiHolder = (AIVH) holder;
-
+            aiHolder.translateProgressBar.setVisibility(View.GONE);
             // Display either original or translated text
             if (m.isTranslated && m.translatedText != null) {
                 aiHolder.msg.setText(m.translatedText);
                 aiHolder.BtnTranslate.setChecked(true);
+                aiHolder.BtnTranslate.setVisibility(View.VISIBLE);
+                aiHolder.BtnTranslate.setChecked(true);
             } else {
                 aiHolder.msg.setText(m.text);
+                aiHolder.BtnTranslate.setVisibility(View.VISIBLE);
                 aiHolder.BtnTranslate.setChecked(false);
             }
 
@@ -77,47 +86,77 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             aiHolder.BtnTranslate.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
                 if (isChecked) {
-                    // If already translated, show cached translation
-                    if (m.translatedText != null) {
-                        aiHolder.msg.setText(m.translatedText);
-                        m.isTranslated = true;
-                        return;
-                    }
+                     //If already translated, show cached translation
+//                    if (m.translatedText != null) {
+//                        aiHolder.msg.setText(m.translatedText);
+//                        m.isTranslated = true;
+//                        return;
+//                    }
 
                     // UX feedback
-                    aiHolder.msg.setText("Translating...");
-                    GroqAIClint.sendMessage(m.text, "translator", new AiResponseCallback() {
-                        @Override
-                        public void onSuccess(String aiMessage) {
-                            m.translatedText = aiMessage;
-                            m.isTranslated = true;
+                    aiHolder.translateProgressBar.setVisibility(View.VISIBLE);
+                    aiHolder.BtnTranslate.setVisibility(View.GONE);
+                    aiHolder.translateProgressBar.setIndeterminate(true);
 
-                            // Update UI on main thread
-                            ((Activity) context).runOnUiThread(() -> {
-                                // Check if ViewHolder is still showing this message
-                                if (messages.get(position) == m) {
-                                    aiHolder.msg.setText(aiMessage);
+                    TranslateClient.translate(
+                            context, // Context
+                            m.text,
+                            "en",
+                            "bn",
+                            new TranslateCallback() {
+                                @Override
+                                public void onSuccess(String translatedText) {
+                                    m.translatedText = translatedText;
+                                    m.isTranslated = true;
 
-                                    if (recyclerView != null) {
-                                        recyclerView.scrollToPosition(position);
-                                    }
+                                    // Update UI on main thread
+                                    ((Activity) context).runOnUiThread(() -> {
+                                        // Check if ViewHolder is still showing this message
+                                        if (messages.get(position) == m) {
+                                            aiHolder.msg.setText(translatedText);
+                                            CuteToast.ct(context, "Translate Success", CuteToast.LENGTH_SHORT, CuteToast.SUCCESS, true).show();
+                                            aiHolder.translateProgressBar.setVisibility(View.GONE);
+                                            aiHolder.BtnTranslate.setVisibility(View.VISIBLE);
+                                            aiHolder.BtnTranslate.setChecked(true);
+
+
+
+                                        }
+                                    });
                                 }
-                            });
 
-                            Log.d(TAG, "Translation success: " + aiMessage);
-                        }
+                                @Override
+                                public void onError(String error) {
+                                    m.isTranslated = false;
 
-                        @Override
-                        public void onFailure(String error) {
-                            ((Activity) context).runOnUiThread(() -> aiHolder.msg.setText("Error: " + error));
-                            Log.d(TAG, "Translation failed: " + error);
-                        }
-                    });
+                                    // Update UI on main thread
+                                    ((Activity) context).runOnUiThread(() -> {
+                                        // Check if ViewHolder is still showing this message
+                                        if (messages.get(position) == m) {
+                                            CuteToast.ct(context, "Failed to translate text", CuteToast.LENGTH_SHORT, CuteToast.ERROR, true).show();
+                                            aiHolder.BtnTranslate.setChecked(false);
+
+                                        }
+                                    });
+                                }
+                            }
+                    );
 
                 } else {
                     // Back to English
                     aiHolder.msg.setText(m.text);
                     m.isTranslated = false;
+                    aiHolder.translateProgressBar.setVisibility(View.GONE);
+                    aiHolder.BtnTranslate.setVisibility(View.VISIBLE);
+                    aiHolder.BtnTranslate.setChecked(false);
+
+                }
+            });
+
+            aiHolder.copyText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WorkWithDevice.copyTextToClipboard(context,aiHolder.msg.getText().toString());
                 }
             });
         }
@@ -132,23 +171,25 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     static class UserVH extends RecyclerView.ViewHolder {
         TextView msg;
-        CheckBox BtnTranslate;
-
         UserVH(View v) {
             super(v);
             msg = v.findViewById(R.id.user_text);
-            BtnTranslate = v.findViewById(R.id.id_translate_btn);
         }
     }
 
     static class AIVH extends RecyclerView.ViewHolder {
         TextView msg;
         CheckBox BtnTranslate;
+        ProgressBar translateProgressBar;
+
+        AppCompatImageButton copyText;
 
         AIVH(View v) {
             super(v);
             msg = v.findViewById(R.id.ai_text);
             BtnTranslate = v.findViewById(R.id.id_translate_btn);
+            translateProgressBar = v.findViewById(R.id.translating_ai_item_progressbar);
+            copyText = v.findViewById(R.id.copy_text_ai_adapter);
         }
     }
 }

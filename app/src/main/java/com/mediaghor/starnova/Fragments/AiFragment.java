@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -29,6 +30,8 @@ import com.mediaghor.starnova.AiRelated.GroqAIClint;
 import com.mediaghor.starnova.AiRelated.SpeechRecognitionListener;
 import com.mediaghor.starnova.AiRelated.TTSListener;
 import com.mediaghor.starnova.AiRelated.TTSManager;
+import com.mediaghor.starnova.AiRelated.TranslateCallback;
+import com.mediaghor.starnova.AiRelated.TranslateClient;
 import com.mediaghor.starnova.Helper.AiResponseEditor;
 import com.mediaghor.starnova.Models.BottomNavViewModel;
 import com.mediaghor.starnova.Models.Message;
@@ -96,6 +99,10 @@ public class AiFragment extends Fragment {
         setupKeyboardInsets();
         initializeManagers();
         requestMicrophonePermission();
+
+
+
+
 
 
         return view;

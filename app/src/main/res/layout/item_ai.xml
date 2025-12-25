@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="@dimen/_10sdp"
-    android:layout_marginBottom="@dimen/_20sdp">
+    android:layout_marginBottom="@dimen/_20sdp"
+    android:paddingRight="@dimen/_10sdp">
 
+    <!-- AI TEXT -->
     <TextView
         android:id="@+id/ai_text"
         android:layout_width="0dp"
@@ -16,18 +17,48 @@
         android:padding="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/id_translate_btn"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
+        app:layout_constraintEnd_toStartOf="@+id/action_container"/>
 
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/id_translate_btn"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_marginStart="8dp"
-        android:button="@null"
-        android:background="@drawable/cb_selector_translate"
-        app:layout_constraintBottom_toBottomOf="@id/ai_text"
+    <!-- ACTION BUTTONS -->
+    <LinearLayout
+        android:id="@+id/action_container"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_60sdp"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/ai_text"/>
+        app:layout_constraintTop_toTopOf="@id/ai_text">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/copy_text_ai_adapter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/copy_btn"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="5dp"/>
+
+        <FrameLayout
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="0dp"
+            android:padding="5dp"
+            android:layout_weight="1">
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/id_translate_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:background="@drawable/cb_selector_translate"/>
+            <ProgressBar
+                android:id="@+id/translating_ai_item_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </FrameLayout>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

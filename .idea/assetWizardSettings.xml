@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="translate" />
-                            <entry key="sourceFile" value="C:\Users\tanmo\Downloads\translate.svg" />
+                            <entry key="outputName" value="icon_error" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../Resources/icon_error.svg" />
                           </map>
                         </option>
                       </PersistentState>
