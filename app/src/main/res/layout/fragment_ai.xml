@@ -19,8 +19,8 @@
             android:layout_height="0dp"/>
 
         <LinearLayout
+            android:id="@+id/mic_spk_anim_container"
             android:foreground="@drawable/black_transparent_black"
-
             android:paddingBottom="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_weight="0.5"
@@ -93,16 +93,41 @@
         </LinearLayout>
 
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="0dp"
             android:layout_weight="1.2"
-            android:layout_width="match_parent"
-            android:id="@+id/id_question"
-            android:textSize="20sp"
-            android:text=""
-            android:textColor="@color/color_white_low"
-            android:padding="10dp"
-            android:maxWidth="@dimen/_250sdp"/>
+            android:layout_width="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/_250sdp"
+                android:padding="10dp"
+                android:text=""
+                android:textColor="@color/color_white_low"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_button_background"
+                android:backgroundTint="@null"
+                android:elevation="4dp"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:stateListAnimator="@null"
+                android:text="See Answer"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_question" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/id_equalizer_fa"
             android:layout_width="@dimen/_80sdp"
