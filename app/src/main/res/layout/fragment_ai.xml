@@ -10,14 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <androidx.recyclerview.widget.RecyclerView
             android:foreground="@drawable/black_transparent_black"
             android:id="@+id/chat_recycler"
             android:layout_width="match_parent"
             android:layout_weight="0.7"
             android:layout_height="0dp"/>
-
         <LinearLayout
             android:id="@+id/mic_spk_anim_container"
             android:foreground="@drawable/black_transparent_black"
@@ -91,8 +89,6 @@
             </RelativeLayout>
 
         </LinearLayout>
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="0dp"
             android:layout_weight="1.2"
@@ -117,12 +113,12 @@
                 android:background="@drawable/gradient_button_background"
                 android:backgroundTint="@null"
                 android:elevation="4dp"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="12dp"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="6dp"
                 android:stateListAnimator="@null"
                 android:text="See Answer"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_margin="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -141,19 +137,12 @@
             app:lottie_loop="true"
             app:lottie_renderMode="hardware"
             app:lottie_cacheComposition="true"/>
-
-
-
-
-
-
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/input_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_gravity="bottom"
         android:gravity="bottom"
         android:background="@color/layout_bg"
@@ -163,8 +152,8 @@
         <EditText
             android:id="@+id/message_input"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:background="@drawable/edittext_bg"
             android:paddingLeft="10dp"
             android:paddingRight="20dp"
